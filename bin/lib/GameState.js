@@ -19,6 +19,10 @@
     this.score = 0;
   };
 
+  GameState.prototype.isGameOver = function() {
+    return (this.timerLimit - this.timer.currentTime) <= 0;
+  };
+
   GameState.prototype.init = function() {
     var self = this;
 
@@ -52,6 +56,15 @@
       };
 
       self.spark.write(JSON.stringify(data));
+
+
+      if (self.isGameOver()) {
+        var gameOverData = {
+          type: "gameOver"
+        };
+
+        self.spark.write(JSON.stringify(gameOverData));
+      }
     });
 
     this.timer.start();

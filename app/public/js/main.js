@@ -65,6 +65,8 @@
     } else if (messageType === "score") {
       gameInfo.score = message["score"];
       scoreEl.text(gameInfo.score);
+    } else if (messageType === "gameOver") {
+      console.log("Gameover");
     }
   });
 

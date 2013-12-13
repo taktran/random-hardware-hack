@@ -11,18 +11,20 @@
    */
   var Timer = function(timeLimitVal, callback) {
     var self = this;
-    var currentTime = 0;
     var timeLimit = timeLimitVal;
     var timerId;
 
-    this.start = function() {
-      timerId = setInterval(function() {
-        currentTime = currentTime + 1;
+    this.currentTime = 0;
 
-        if (currentTime > timeLimit) {
+    this.start = function() {
+      var self = this;
+      timerId = setInterval(function() {
+        self.currentTime = self.currentTime + 1;
+
+        if (self.currentTime > timeLimit) {
           self.stop();
         } else {
-          callback(currentTime);
+          callback(self.currentTime);
         }
       }, TIMER_INTERVAL);
     };
