@@ -49,23 +49,39 @@ board.on("ready", function() {
 
   var timer;
   var gameState = {
-    init: function() {
+    init: function(spark) {
       if (timer) {
         timer.stop();
       }
+
+      var data = {
+        type: "info",
+        message: {
+          timeLimit: GAME_TIMER_LIMIT
+        }
+      };
+
+      spark.write(JSON.stringify(data));
     },
 
-    start: function() {
+    start: function(spark) {
       timer = new Timer(GAME_TIMER_LIMIT, function(currentTime) {
         var timeLeft = GAME_TIMER_LIMIT - parseInt(currentTime, 10);
+        var data = {
+          type: "timer",
+          message: {
+            timeLeft: timeLeft,
+            currentTime: currentTime
+          }
+        };
 
-
+        spark.write(JSON.stringify(data));
       });
 
       timer.start();
     },
 
-    restart: function() {
+    restart: function(spark) {
       timer.stop();
     }
   };
@@ -85,11 +101,11 @@ board.on("ready", function() {
 
       if (messageType === "gameState") {
         if (message === "init") {
-          gameState.init();
+          gameState.init(spark);
         } else if (message === "start") {
-          gameState.start();
+          gameState.start(spark);
         } else if (message === "restart") {
-          gameState.restart();
+          gameState.restart(spark);
         }
       }
     });

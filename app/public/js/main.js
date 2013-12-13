@@ -1,6 +1,18 @@
 /*global Primus: true*/
 (function (){
   'use strict';
+  var gameInfo = {};
+
+  // Buttons
+  var startButtonEl = $('.start-button');
+  var restartButtonEl = $('.restart-button');
+
+  // Containers
+  var initContainer = $('.init-container');
+  var gameContainer = $('.game-container');
+
+  // Time
+  var timerEl = $('.timer');
 
   // ---------------------------------------
   // Primus connection
@@ -32,15 +44,19 @@
     console.log('Connection closed');
   });
 
-  primus.on('data', function message(rawData) {
+  primus.on('data', function(rawData) {
     var data = JSON.parse(rawData);
     var messageType = data["type"];
+    var message = data["message"];
 
     // console.log(data);
 
     if (messageType === "timer") {
-      // Update timer
-      console.log("Timer");
+      var timeLeft = message.timeLeft;
+      timerEl.text(timeLeft);
+    } else if (messageType === "info") {
+      gameInfo.timeLimit = message["timeLimit"];
+      timerEl.text(gameInfo.timeLimit);
     }
   });
 
@@ -49,13 +65,6 @@
   // ---------------------------------------
 
   function initGame() {
-    // Buttons
-    var startButtonEl = $('.start-button');
-    var restartButtonEl = $('.restart-button');
-
-    // Containers
-    var initContainer = $('.init-container');
-    var gameContainer = $('.game-container');
 
     var gameState = {
       init: function() {
