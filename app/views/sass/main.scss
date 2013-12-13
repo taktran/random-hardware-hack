@@ -3,6 +3,10 @@ $white: white;
 
 body {
   padding-top: 50px;
+
+  &.light {
+    background-color: yellow;
+  }
 }
 
 .starter-template {

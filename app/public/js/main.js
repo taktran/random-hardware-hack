@@ -68,6 +68,12 @@
       scoreEl.text(gameInfo.score);
     } else if (messageType === "gameOver") {
       gameOverModal.modal();
+    } else if (messageType === "light") {
+      if (!message.lowLight) {
+        $("body").addClass("light");
+      } else {
+        $("body").removeClass("light");
+      }
     }
   });
 
