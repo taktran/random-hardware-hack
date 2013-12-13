@@ -116,22 +116,19 @@ board.on("ready", function() {
     // Set up sensors
     // --------------------------------------------
 
-    snowman.on("high", function() {
+    snowman.on("high", _.throttle(function() {
       // Snow man is hit!
-      // Throttle hit by 1 sec
-      _.throttle(function() {
-        gameState.incrementScore();
+      gameState.incrementScore();
 
-        var data = {
-          type: "score",
-          message: {
-            score: gameState.score
-          }
-        };
+      var data = {
+        type: "score",
+        message: {
+          score: gameState.score
+        }
+      };
 
-        spark.write(JSON.stringify(data));
-      }, 1000)();
-    });
+      spark.write(JSON.stringify(data));
+    }, 1000));
 
 
     // --------------------------------------------
