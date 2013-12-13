@@ -30,9 +30,9 @@ To run the site using a different livereload port (default is `35729`), use the 
 
 Files are in `bin`, and `bin/playground`.
 
-To run
+To run the game:
 
-    node [file name]
+    node bin/novelty-wall.js
 
 ## Testing
 
