@@ -11,6 +11,8 @@
 
   primus.on('open', function open() {
     console.log('Connection open');
+
+    initGame();
   });
 
   primus.on('error', function error(err) {
@@ -32,98 +34,72 @@
 
   primus.on('data', function message(rawData) {
     var data = JSON.parse(rawData);
+    var messageType = data["type"];
 
-    console.log(data);
+    // console.log(data);
+
+    if (messageType === "timer") {
+      // Update timer
+      console.log("Timer");
+    }
   });
 
   // ---------------------------------------
   // Game setup
   // ---------------------------------------
 
-  // Buttons
-  var startButtonEl = $('.start-button');
-  var restartButtonEl = $('.restart-button');
+  function initGame() {
+    // Buttons
+    var startButtonEl = $('.start-button');
+    var restartButtonEl = $('.restart-button');
 
-  // Containers
-  var initContainer = $('.init-container');
-  var gameContainer = $('.game-container');
+    // Containers
+    var initContainer = $('.init-container');
+    var gameContainer = $('.game-container');
 
-  // Timer
-  var timerEl = $('.timer');
-  var TIMER_INTERVAL = 1000;
-  var GAME_TIMER_LIMIT = 10; // seconds
+    var gameState = {
+      init: function() {
+        initContainer.show();
+        gameContainer.hide();
 
-  /**
-   * Timer object
-   *
-   * @param {Integer} timeLimitVal time limit in seconds
-   * @param {Function} callback callback(currentTime)
-   */
-  var Timer = function(timeLimitVal, callback) {
-    var self = this;
-    var currentTime = 0;
-    var timeLimit = timeLimitVal;
-    var timerId;
+        primus.write({
+          type: "gameState",
+          message: "init"
+        });
+      },
 
-    this.start = function() {
-      timerId = setInterval(function() {
-        currentTime = currentTime + 1;
+      start: function() {
+        initContainer.hide();
+        gameContainer.show();
 
-        if (currentTime > timeLimit) {
-          self.stop();
-        } else {
-          callback(currentTime);
-        }
-      }, TIMER_INTERVAL);
+        primus.write({
+          type: "gameState",
+          message: "start"
+        });
+      },
+
+      restart: function() {
+        gameState.init();
+
+        primus.write({
+          type: "gameState",
+          message: "restart"
+        });
+      }
     };
 
-    this.stop = function() {
-      clearTimeout(timerId);
-    };
-  };
+    // ---------------------------------------
+    // Events
+    // ---------------------------------------
 
-  var timer;
-  var gameState = {
-    init: function() {
-      initContainer.show();
-      gameContainer.hide();
-    },
+    startButtonEl.click(function() {
+      gameState.start();
+    });
 
-    start: function() {
-      initContainer.hide();
-      gameContainer.show();
+    restartButtonEl.click(function() {
+      gameState.restart();
+    });
 
-      // Init time
-      timerEl.text(GAME_TIMER_LIMIT);
-
-      timer = new Timer(GAME_TIMER_LIMIT, function(currentTime) {
-        var timeLeft = GAME_TIMER_LIMIT - parseInt(currentTime, 10);
-
-        // Update timer text
-        timerEl.text(timeLeft);
-      });
-
-      timer.start();
-    },
-
-    restart: function() {
-      timer.stop();
-
-      gameState.init();
-    }
-  };
-
-  // ---------------------------------------
-  // Events
-  // ---------------------------------------
-
-  startButtonEl.click(function() {
-    gameState.start();
-  });
-
-  restartButtonEl.click(function() {
-    gameState.restart();
-  });
-
-  gameState.init();
+    gameState.init();
+  }
 })();

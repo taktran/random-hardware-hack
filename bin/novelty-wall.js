@@ -2,17 +2,20 @@
 
 'use strict';
 
-var NORMALIZED_MIN = 0,
-    NORMALIZED_MAX = 1.0,
-
-    LIGHT_SENSOR_MIN = 880,
-    LIGHT_SENSOR_MAX = 1015,
-
-    PRESSURE_SENSOR_MIN = 50,
-    PRESSURE_SENSOR_MAX = 1023;
+// Timer
+var GAME_TIMER_LIMIT = 10; // seconds
 
 var five = require("johnny-five");
+var Primus = require('primus');
+
+var http = require('http');
+var server = http.createServer();
+var primus = new Primus(server, {
+  transformer: 'sockjs'
+});
+
 var Sensor = require("./lib/Sensor");
+var Timer = require("./lib/Timer");
 
 function inRange(value, valueMin, valueMax, rangeMin, rangeMax) {
   var valueProportion = Math.abs(value - valueMin) / (valueMax - valueMin),
@@ -39,34 +42,56 @@ board.on("ready", function() {
   // Hardware setup
   // --------------------------------------------
 
-  // // Light
-  // var rgb = new five.Led.RGB([ 9, 10, 11 ]);
 
-  // // Photo resister
-  // var photoResistor = new Sensor("A3", board);
+  // --------------------------------------------
+  // Game setup
+  // --------------------------------------------
 
-  // // Pressure sensor
-  // var pressureSensor = new Sensor("A4", board);
+  var timer;
+  var gameState = {
+    init: function() {
+      if (timer) {
+        timer.stop();
+      }
+    },
+
+    start: function() {
+      timer = new Timer(GAME_TIMER_LIMIT, function(currentTime) {
+        var timeLeft = GAME_TIMER_LIMIT - parseInt(currentTime, 10);
+
+
+      });
+
+      timer.start();
+    },
+
+    restart: function() {
+      timer.stop();
+    }
+  };
 
   // --------------------------------------------
   // Real time connection
   // --------------------------------------------
 
-  var Primus = require('primus'),
-      http = require('http');
-
-  var server = http.createServer(),
-    primus = new Primus(server, {
-      transformer: 'sockjs'
-    });
-
   primus.on('connection', function(spark) {
     console.log('connection:\t', spark.id);
 
     spark.on('data', function(data) {
+      var messageType = data["type"];
+      var message = data["message"];
+
       console.log(data);
 
-      // rgb.color(data);
+      if (messageType === "gameState") {
+        if (message === "init") {
+          gameState.init();
+        } else if (message === "start") {
+          gameState.start();
+        } else if (message === "restart") {
+          gameState.restart();
+        }
+      }
     });
   });
 

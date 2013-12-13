@@ -11,6 +11,8 @@ body {
 }
 
 .init-container {
+  display: none; // Hide by default
+
   text-align: center;
 
   .start-button {
@@ -25,6 +27,8 @@ body {
 }
 
 .game-container {
+  display: none; // Hide by default
+
   .timer-container {
     text-align: center;
   }

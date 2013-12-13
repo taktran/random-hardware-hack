@@ -6,6 +6,7 @@ body {
   text-align: center; }
 
 .init-container {
+  display: none;
   text-align: center; }
   .init-container .start-button {
     background-color: #339900;
@@ -15,17 +16,19 @@ body {
     padding: 20px 40px;
     margin-top: 60px; }
 
-.game-container .timer-container {
-  text-align: center; }
-.game-container .timer {
-  font-size: 3em;
-  line-height: 1em; }
-.game-container .restart-button {
-  margin-top: 20px; }
-.game-container .score-container {
-  text-align: center; }
-.game-container .restart-container {
-  text-align: center; }
+.game-container {
+  display: none; }
+  .game-container .timer-container {
+    text-align: center; }
+  .game-container .timer {
+    font-size: 3em;
+    line-height: 1em; }
+  .game-container .restart-button {
+    margin-top: 20px; }
+  .game-container .score-container {
+    text-align: center; }
+  .game-container .restart-container {
+    text-align: center; }
 
 .image-container {
   position: relative; }
