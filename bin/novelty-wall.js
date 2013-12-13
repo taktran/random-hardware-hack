@@ -80,17 +80,19 @@ board.on("ready", function() {
     // --------------------------------------------
 
     snowman.on("high", _.throttle(function() {
-      // Snow man is hit!
-      gameState.incrementScore();
+      if (!gameState.isGameOver()) {
+        // Snow man is hit!
+        gameState.incrementScore();
 
-      var data = {
-        type: "score",
-        message: {
-          score: gameState.score
-        }
-      };
+        var data = {
+          type: "score",
+          message: {
+            score: gameState.score
+          }
+        };
 
-      spark.write(JSON.stringify(data));
+        spark.write(JSON.stringify(data));
+      }
     }, SENSOR_THROTTLE_TIME));
 
 
