@@ -23,14 +23,14 @@ body {
   .game-container .timer-container {
     text-align: center; }
   .game-container .timer {
-    font-size: 3em;
+    font-size: 10em;
     line-height: 1em; }
   .game-container .restart-button {
     margin-top: 20px; }
   .game-container .score-container {
     text-align: center; }
   .game-container .score {
-    font-size: 3em;
+    font-size: 10em;
     line-height: 1em; }
   .game-container .restart-container {
     text-align: center; }
