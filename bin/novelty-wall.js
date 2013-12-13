@@ -9,6 +9,9 @@ var SENSOR_PINS = {
   snowman: 13
 }
 
+// Amount of time to throttle before next input
+var SENSOR_THROTTLE_TIME = 500;
+
 var five = require("johnny-five");
 var Primus = require('primus');
 var _ = require('underscore');
@@ -88,7 +91,7 @@ board.on("ready", function() {
       };
 
       spark.write(JSON.stringify(data));
-    }, 1000));
+    }, SENSOR_THROTTLE_TIME));
 
 
     // --------------------------------------------
