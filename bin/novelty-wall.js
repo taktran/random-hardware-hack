@@ -42,7 +42,7 @@ function inRange(value, valueMin, valueMax, rangeMin, rangeMax) {
 var board = five.Board();
 
 board.on("ready", function() {
-  var gameState;
+  var connections = {};
 
   // --------------------------------------------
   // Hardware setup
@@ -60,9 +60,17 @@ board.on("ready", function() {
   // --------------------------------------------
 
   primus.on('connection', function(spark) {
+    var gameState;
     console.log('connection:\t', spark.id);
 
-    var gameState = new GameState(spark, GAME_TIMER_LIMIT);
+    // Store connections based on spark id.
+    // Retrieve it if it already exists
+    if (!connections[spark.id]) {
+      connections[spark.id] = {
+        gameState: new GameState(spark, GAME_TIMER_LIMIT)
+      }
+    }
+    gameState = connections[spark.id]["gameState"];
 
     // --------------------------------------------
     // Set up sensors
@@ -107,6 +115,9 @@ board.on("ready", function() {
 
   primus.on('disconnection', function(spark) {
     console.log('disconnection:\t', spark.id);
+
+    // Clear memory
+    delete connections[spark.id];
   });
 
   console.log(' [*] Listening on 0.0.0.0:9999' );
