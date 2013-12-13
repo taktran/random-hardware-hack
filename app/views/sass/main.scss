@@ -10,12 +10,31 @@ body {
   text-align: center;
 }
 
-.start-button {
-  background-color: $green;
-  color: $white;
-  border: none;
+.init-container {
+  text-align: center;
 
-  font-size: 5em;
-  padding: 20px 40px;
-  margin-top: 60px;
+  .start-button {
+    background-color: $green;
+    color: $white;
+    border: none;
+
+    font-size: 5em;
+    padding: 20px 40px;
+    margin-top: 60px;
+  }
+}
+
+.game-container {
+  .timer-container {
+    text-align: center;
+  }
+
+  .timer {
+    font-size: 3em;
+    line-height: 1em;
+  }
+
+  .restart-button {
+    margin-top: 20px;
+  }
 }

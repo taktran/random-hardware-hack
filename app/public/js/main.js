@@ -1,6 +1,9 @@
 (function (){
   'use strict';
+
+  // Buttons
   var startButtonEl = $('.start-button');
+  var restartButtonEl = $('.restart-button');
 
   // Containers
   var initContainer = $('.init-container');
@@ -38,25 +41,23 @@
     this.stop = function() {
       clearTimeout(timerId);
     };
-  }
+  };
 
+  var timer;
   var gameState = {
     init: function() {
+      initContainer.show();
       gameContainer.hide();
-
-      startButtonEl.click(function() {
-        initContainer.hide();
-        gameState.start();
-      });
     },
 
     start: function() {
+      initContainer.hide();
       gameContainer.show();
 
       // Init time
       timerEl.text(GAME_TIMER_LIMIT);
 
-      var timer = new Timer(GAME_TIMER_LIMIT, function(currentTime) {
+      timer = new Timer(GAME_TIMER_LIMIT, function(currentTime) {
         var timeLeft = GAME_TIMER_LIMIT - parseInt(currentTime, 10);
 
         // Update timer text
@@ -64,8 +65,26 @@
       });
 
       timer.start();
+    },
+
+    restart: function() {
+      timer.stop();
+
+      gameState.init();
     }
   };
+
+  // ---------------------------------------
+  // Events
+  // ---------------------------------------
+
+  startButtonEl.click(function() {
+    gameState.start();
+  });
+
+  restartButtonEl.click(function() {
+    gameState.restart();
+  });
 
   gameState.init();
 })();
