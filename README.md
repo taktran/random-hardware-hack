@@ -1,6 +1,8 @@
-# Sensor wall
+# Christmas novelty wall
 
-A website built using [generator-starttter](https://github.com/taktran/generator-starttter).
+A Christmas themed wall of hardware sensors.
+
+For the [pebblecode](http://pebblecode.com) Christmas themed hackday 2013.
 
 ## Development
 
@@ -23,6 +25,14 @@ To run the site on another port, use the `port` flag eg,
 To run the site using a different livereload port (default is `35729`), use the `lrp` flag (prevents this error: `Fatal error: Port 35729 is already in use by another process.`) eg,
 
     grunt --lrp=35720
+
+### Run hardware sensors
+
+Files are in `bin`, and `bin/playground`.
+
+To run
+
+    node [file name]
 
 ## Testing
 
