@@ -11,6 +11,7 @@ var SENSOR_PINS = {
 
 var five = require("johnny-five");
 var Primus = require('primus');
+var _ = require('underscore');
 
 var http = require('http');
 var server = http.createServer();
@@ -49,10 +50,6 @@ board.on("ready", function() {
 
   var snowman = new five.Pin(SENSOR_PINS.snowman);
 
-  snowman.on("high", function() {
-    // Snow man is hit!
-  });
-
   // --------------------------------------------
   // Game setup
   // --------------------------------------------
@@ -60,10 +57,17 @@ board.on("ready", function() {
   var timer;
   gameState = {
     score: 0,
+    incrementScore: function() {
+      this.score = this.score + 1;
+    },
+    resetScore: function() {
+      this.score = 0;
+    },
+
     init: function(spark) {
       var self = this;
 
-      self.score = 0;
+      self.resetScore();
       if (timer) {
         timer.stop();
       }
@@ -107,6 +111,32 @@ board.on("ready", function() {
 
   primus.on('connection', function(spark) {
     console.log('connection:\t', spark.id);
+
+    // --------------------------------------------
+    // Set up sensors
+    // --------------------------------------------
+
+    snowman.on("high", function() {
+      // Snow man is hit!
+      // Throttle hit by 1 sec
+      _.throttle(function() {
+        gameState.incrementScore();
+
+        var data = {
+          type: "score",
+          message: {
+            score: gameState.score
+          }
+        };
+
+        spark.write(JSON.stringify(data));
+      }, 1000)();
+    });
+
+
+    // --------------------------------------------
+    // Read data sent from browser
+    // --------------------------------------------
 
     spark.on('data', function(data) {
       var messageType = data["type"];

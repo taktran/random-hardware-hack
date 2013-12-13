@@ -63,7 +63,8 @@
       gameInfo.score = message["score"];
       scoreEl.text(gameInfo.score);
     } else if (messageType === "score") {
-      console.log(message);
+      gameInfo.score = message["score"];
+      scoreEl.text(gameInfo.score);
     }
   });
 
