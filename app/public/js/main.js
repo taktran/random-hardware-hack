@@ -14,6 +14,7 @@
   // Game info
   var timerEl = $('.timer');
   var scoreEl = $('.score');
+  var gameOverModal = $('#gameOverModal');
 
   // ---------------------------------------
   // Primus connection
@@ -66,7 +67,7 @@
       gameInfo.score = message["score"];
       scoreEl.text(gameInfo.score);
     } else if (messageType === "gameOver") {
-      console.log("Gameover");
+      gameOverModal.modal();
     }
   });
 
@@ -80,6 +81,7 @@
       init: function() {
         initContainer.show();
         gameContainer.hide();
+        gameOverModal.modal('hide');
 
         primus.write({
           type: "gameState",
