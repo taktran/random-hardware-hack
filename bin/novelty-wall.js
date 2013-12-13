@@ -5,6 +5,10 @@
 // Timer
 var GAME_TIMER_LIMIT = 10; // seconds
 
+var SENSOR_PINS = {
+  snowman: 13
+}
+
 var five = require("johnny-five");
 var Primus = require('primus');
 
@@ -37,19 +41,29 @@ function inRange(value, valueMin, valueMax, rangeMin, rangeMax) {
 var board = five.Board();
 
 board.on("ready", function() {
+  var gameState;
 
   // --------------------------------------------
   // Hardware setup
   // --------------------------------------------
 
+  var snowman = new five.Pin(SENSOR_PINS.snowman);
+
+  snowman.on("high", function() {
+    // Snow man is hit!
+  });
 
   // --------------------------------------------
   // Game setup
   // --------------------------------------------
 
   var timer;
-  var gameState = {
+  gameState = {
+    score: 0,
     init: function(spark) {
+      var self = this;
+
+      self.score = 0;
       if (timer) {
         timer.stop();
       }
@@ -57,7 +71,8 @@ board.on("ready", function() {
       var data = {
         type: "info",
         message: {
-          timeLimit: GAME_TIMER_LIMIT
+          timeLimit: GAME_TIMER_LIMIT,
+          score: self.score
         }
       };
 

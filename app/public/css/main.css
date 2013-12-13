@@ -27,6 +27,9 @@ body {
     margin-top: 20px; }
   .game-container .score-container {
     text-align: center; }
+  .game-container .score {
+    font-size: 3em;
+    line-height: 1em; }
   .game-container .restart-container {
     text-align: center; }
 

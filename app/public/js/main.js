@@ -11,8 +11,9 @@
   var initContainer = $('.init-container');
   var gameContainer = $('.game-container');
 
-  // Time
+  // Game info
   var timerEl = $('.timer');
+  var scoreEl = $('.score');
 
   // ---------------------------------------
   // Primus connection
@@ -55,8 +56,14 @@
       var timeLeft = message.timeLeft;
       timerEl.text(timeLeft);
     } else if (messageType === "info") {
+
       gameInfo.timeLimit = message["timeLimit"];
       timerEl.text(gameInfo.timeLimit);
+
+      gameInfo.score = message["score"];
+      scoreEl.text(gameInfo.score);
+    } else if (messageType === "score") {
+      console.log(message);
     }
   });
 
