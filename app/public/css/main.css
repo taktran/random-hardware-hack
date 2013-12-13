@@ -1,8 +1,14 @@
 body {
-  padding-top: 50px;
-}
+  padding-top: 50px; }
 
 .starter-template {
   padding: 40px 15px;
-  text-align: center;
-}
+  text-align: center; }
+
+.start-button {
+  background-color: #339900;
+  color: white;
+  border: none;
+  font-size: 5em;
+  padding: 20px 40px;
+  margin-top: 60px; }
