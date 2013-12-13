@@ -20,7 +20,7 @@ var primus = new Primus(server, {
 });
 
 var Sensor = require("./lib/Sensor");
-var Timer = require("./lib/Timer");
+var GameState = require("./lib/GameState");
 
 function inRange(value, valueMin, valueMax, rangeMin, rangeMax) {
   var valueProportion = Math.abs(value - valueMin) / (valueMax - valueMin),
@@ -54,56 +54,6 @@ board.on("ready", function() {
   // Game setup
   // --------------------------------------------
 
-  var timer;
-  gameState = {
-    score: 0,
-    incrementScore: function() {
-      this.score = this.score + 1;
-    },
-    resetScore: function() {
-      this.score = 0;
-    },
-
-    init: function(spark) {
-      var self = this;
-
-      self.resetScore();
-      if (timer) {
-        timer.stop();
-      }
-
-      var data = {
-        type: "info",
-        message: {
-          timeLimit: GAME_TIMER_LIMIT,
-          score: self.score
-        }
-      };
-
-      spark.write(JSON.stringify(data));
-    },
-
-    start: function(spark) {
-      timer = new Timer(GAME_TIMER_LIMIT, function(currentTime) {
-        var timeLeft = GAME_TIMER_LIMIT - parseInt(currentTime, 10);
-        var data = {
-          type: "timer",
-          message: {
-            timeLeft: timeLeft,
-            currentTime: currentTime
-          }
-        };
-
-        spark.write(JSON.stringify(data));
-      });
-
-      timer.start();
-    },
-
-    restart: function(spark) {
-      timer.stop();
-    }
-  };
 
   // --------------------------------------------
   // Real time connection
@@ -111,6 +61,8 @@ board.on("ready", function() {
 
   primus.on('connection', function(spark) {
     console.log('connection:\t', spark.id);
+
+    var gameState = new GameState(spark, GAME_TIMER_LIMIT);
 
     // --------------------------------------------
     // Set up sensors
