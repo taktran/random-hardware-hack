@@ -7,7 +7,7 @@ var GAME_TIMER_LIMIT = 30; // seconds
 
 var SENSOR_PINS = {
   snowman: 13
-}
+};
 
 var LIGHT_SENSOR_MIN = 880;
 var LIGHT_SENSOR_MAX = 1015;
@@ -64,7 +64,7 @@ board.on("ready", function() {
     if (!connections[spark.id]) {
       connections[spark.id] = {
         gameState: new GameState(spark, GAME_TIMER_LIMIT)
-      }
+      };
     }
     gameState = connections[spark.id]["gameState"];
 
