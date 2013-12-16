@@ -100,7 +100,7 @@ board.on("ready", function() {
       };
 
       // console.log("light:", normVal, "(", value, ")");
-      if (normVal < 0.5) {
+      if (normVal < LIGHT_ON_THRESHOLD) {
         data.message.lowLight = true;
       } else {
         data.message.lowLight = false;
