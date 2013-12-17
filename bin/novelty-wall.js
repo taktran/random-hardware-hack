@@ -6,7 +6,8 @@
 var GAME_TIMER_LIMIT = 30; // seconds
 
 var SENSOR_PINS = {
-  snowman: 13
+  snowman: 13,
+  photoResistor: "A0"
 };
 
 var LIGHT_SENSOR_MIN = 880;
@@ -44,7 +45,7 @@ board.on("ready", function() {
   var snowman = new five.Pin(SENSOR_PINS.snowman);
 
   // Photo resister
-  var photoResistor = new Sensor("A0", board);
+  var photoResistor = new Sensor(SENSOR_PINS.photoResistor, board);
 
   // --------------------------------------------
   // Game setup
