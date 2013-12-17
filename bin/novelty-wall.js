@@ -48,11 +48,6 @@ board.on("ready", function() {
   var photoResistor = new Sensor(SENSOR_PINS.photoResistor, board);
 
   // --------------------------------------------
-  // Game setup
-  // --------------------------------------------
-
-
-  // --------------------------------------------
   // Real time connection
   // --------------------------------------------
 
