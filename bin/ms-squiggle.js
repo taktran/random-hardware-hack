@@ -41,10 +41,10 @@ board.on("ready", function() {
   // Hardware setup
   // --------------------------------------------
 
-  sensor_creator("lightSensor", "A1", 100, "change", light_sensor_callback);
-  sensor_creator("flexSensor", "A2", 100, "change", flex_sensor_callback);
-  sensor_creator("pressureSensor", "A0", 100, "change", pressure_sensor_callback);
-
+  sensor_creator("lightSensor", {pin:"A1",freq:100}, "change",light_sensor_callback);
+  sensor_creator("flexSensor", {pin:"A2",freq:100}, "data", flex_sensor_callback);
+  sensor_creator("pressureSensor", {pin:"A0", freq:100}, "change", pressure_sensor_callback);
+  sensor_creator("potentiometoer", {pin:"A5", freq:100}, "change", potentiometer_callback);
   // --------------------------------------------
   // Real time connection
   // --------------------------------------------
@@ -117,6 +117,10 @@ board.on("ready", function() {
 
 });
 
+function potentiometer_callback(value, name){
+console.log(value + " " + name);
+}
+
 function light_sensor_callback(value, name){
   console.log(value + " " + name);
 }
@@ -129,11 +133,8 @@ function flex_sensor_callback(value, name){
   console.log(value + " " + name);
 }
 
-function sensor_creator (name, inputPin, inputFreq, inputEvent, callback) {
-  var sensor = new five.Sensor({
-    pin: inputPin,
-    freq: inputFreq
-  });
+function sensor_creator (name, options, inputEvent, callback) {
+  var sensor = new five.Sensor(options);
 
   sensor.on(inputEvent, function(){
     callback(this.value, name)
