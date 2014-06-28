@@ -68,7 +68,7 @@
       });
     });
 
-    var brokenRollBtn = ".broken-roll-left-btn";
+    var brokenRollBtn = ".broken-roll-btn";
     $(brokenRollBtn).click(function() {
       var animationTime = 600;
       var animationBackTime = 600;
