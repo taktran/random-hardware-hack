@@ -1,10 +1,10 @@
-# Christmas novelty wall
+# Random hardware hack
 
-A Christmas themed wall of hardware sensors, for the [pebblecode](http://pebblecode.com) Christmas themed [hackday 2013](http://blog.pebblecode.com/post/70184561422/pebble-hackmas-day-22-people-10-apps-8-hours).
+A random hardware hack, where we built stuff...
 
-When setup, it is a web based game, which connects up to a paper snowman face (through an arduino), which scores points when it's face is hit. There is also a time limit for hitting the face.
+Have a look in `bin`.
 
-There is also a photo resistor (light sensor) that changes the background of the web site yellow when lit up.
+Hacked off the [Christmas novelty wall](https://github.com/pebblecode/christmas-novelty-wall).
 
 Main libraries used:
 
@@ -14,24 +14,6 @@ Main libraries used:
 ## Setup
 
 Currently the setup only supports a simple circuit with a snowman face and a photo resistor.
-
-### Set up the hardware
-
-An example of the hardware setup:
-
-![Hardware setup](http://f.cl.ly/items/3b1r063r3q2F0b3k421D/Screen%20Shot%202013-12-16%20at%2016-12-2013,%205.24.04%20PM.png)
-
-#### Snowman face
-
-The snowman face follows a similar circuit to https://github.com/rwaldron/johnny-five/blob/master/docs/pin.md
-
-To set it up:
-
-1. Cut out 2 pieces of paper in the shape of a snowman face.
-2. On both pieces of paper, paint 2 dots in the middle with [bare conductive electronic paint](http://www.bareconductive.com/store/products/electric-paint-pen-10ml) or similar. Also connect the dots to the edge of the paper with the paint.
-3. Connect the lines on the edge with wire, and connect one wire to the Ground pin, and the other to pin 13 of the arduino board.
-4. Tape the two face pieces together, making sure that the conductive surfaces do not touch, unless pressed on. You may also need to sticky tape the lines that connect the middle circle to the edge so they don't accidently touch. Make sure that the 2 middle circles can have contact and complete the circuit though.
-5. Paint the snowman face on one of the sides and put it into the scene.
 
 #### Photo resistor
 
@@ -45,7 +27,7 @@ The photo resistor is wired up like this example: https://github.com/rwaldron/jo
 
 2. Start the hardware/web app server
 
-    node bin/novelty-wall.js
+    node bin/ms-squiggle.js
 
 There are also various test files in `bin/playground` to test the hardware setup.
 

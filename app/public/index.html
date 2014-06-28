@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Christmas novelty wall</title>
+    <title>Rolly Polly</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
 
@@ -23,64 +23,28 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-          <a class="navbar-brand" href="#">Christmas novelty wall</a>
+          <a class="navbar-brand" href="#">Rolly Polly</a>
+
+          <div class="btn-group controls">
+            <button class="btn btn-primary hat-hide-btn">hat show/hide</button>
+            <button class="btn btn-primary hat-tip-btn">hat tip</button>
+            <button class="btn btn-primary hat-roll-btn">hat roll</button>
+          </div>
+
+          <div class="btn-group controls">
+            <button class="btn btn-primary roll-left-btn">roll left</button>
+          </div>
         </div>
       </div>
     </div>
 
     <div class="container col-md-12">
-      <div class="init-container">
-        <button class="start-button btn">Start</button>
-      </div>
-
-      <div class="game-container">
-        <div class="info-bar col-sm-3">
-          <div class="timer-container">
-            <h3>Time left</h3>
-            <div class="timer"></div>
-          </div>
-
-          <div class="score-container">
-            <h3>Score</h3>
-            <div class="score"></div>
-          </div>
-
-          <div class="restart-container">
-            <button class="restart-button btn">Restart</button>
-          </div>
-        </div>
-
-        <div class="background-container col-sm-9">
-          <h2>Hit the red targets</h2>
-
-          <div class="image-container">
-            <!-- Image size: 3264 × 2448 -->
-            <img width="652" height"490" src="img/background.jpg"/>
-
-            <div class="overlay-1"></div>
-          </div>
-        </div>
-      </div>
+      <div id="rolly-polly"></div>
     </div><!-- /.container -->
-
-    <!-- Game over modal -->
-    <div class="modal fade" id="gameOverModal" tabindex="-1" role="dialog" aria-labelledby="gameOverModal" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id="myModalLabel">Game over</h4>
-          </div>
-          <div class="modal-body">
-            <p>You scored <span class="score"></span> points!</p>
-            <p><button class="restart-button btn">Restart</button></p>
-          </div>
-        </div><!-- /.modal-content -->
-      </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
 
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="vendor/snapsvg/snap.svg-min.js"></script>
 
     <script src="js/main.js"></script>
   </body>
