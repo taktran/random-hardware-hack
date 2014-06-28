@@ -58,7 +58,7 @@
       var moveTime = 700;
 
       hat.animate({
-        transform: "t-100,0 R -90"
+        transform: "t-85,0 R -90"
       }, 300, mina.easeout, function() {
         // Come back
         hat.animate({
