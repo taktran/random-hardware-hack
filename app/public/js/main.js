@@ -26,13 +26,32 @@
     // For debugging
     window.hat = hat;
 
-    var hatBtnSel = ".hat-btn";
-    var hatBtn = $(hatBtnSel);
-    hatBtn.click(function() {
+    // Show/Hide hat
+    var hatHideBtnSel = ".hat-hide-btn";
+    var hatHideBtn = $(hatHideBtnSel);
+    hatHideBtn.click(function() {
       hat.toggleClass('hide');
-      hatBtn.toggleClass('active');
+
+      hatHideBtn.toggleClass('btn-primary');
+      hatHideBtn.toggleClass('btn-default');
     });
 
+    // Tip the hat
+    var hatTipBtnSel = ".hat-tip-btn";
+    $(hatTipBtnSel).click(function() {
+      var startDeg = 0;
+      var toDeg = 3;
+      var startMoveTime = 700;
+      var endMoveTime = 700;
+
+      hat.animate({
+        transform: "t0,0 R " + toDeg
+      }, startMoveTime, mina.elastic, function() {
+        hat.animate({
+          transform: "t0,0 R " + startDeg
+        }, endMoveTime, mina.elastic);
+      });
+    });
   });
 
   // ---------------------------------------
