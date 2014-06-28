@@ -103,6 +103,32 @@
         }, animationBackTime, mina.easein);
       });
     });
+
+    var rollLeftBtn = ".roll-left-btn";
+    $(rollLeftBtn).click(function() {
+      var animationTime = 600;
+      var animationBackTime = 600;
+      var rotation = 500;
+      var xMove = -200;
+
+      legRollLarge.animate({
+        transform: "t" + xMove + ",0,r360"
+      }, animationTime, mina.easeout, function() {
+        // Come back
+        legRollLarge.animate({
+          transform: "t0,0"
+        }, animationBackTime, mina.easein);
+      });
+
+      smallRollLarge.animate({
+        transform: "t" + xMove + ",0,r" + -rotation // Negate rotation
+      }, animationTime, mina.easeout, function() {
+        // Come back
+        smallRollLarge.animate({
+          transform: "t0,0"
+        }, animationBackTime, mina.easein);
+      });
+    });
   });
 
   // ---------------------------------------
