@@ -1,4 +1,5 @@
-/*global Primus: true*/
+/*jshint -W064 */
+/*global Primus: true, Snap: true*/
 (function (){
   'use strict';
 
@@ -7,15 +8,32 @@
   // ---------------------------------------
   // Snap svg
   // ---------------------------------------
+  
   var imageSel = '#rolly-polly';
   var imagePath = '../img/ms-squiggle.svg';
   var image = Snap(imageSel);
 
   Snap.load(imagePath, function(f) {
-    var g = f.select("svg");
-    image.append(g);
-  });
+    image.append(f);
 
+    // var face = f.select("#face");
+    var hat = image.select("#hat");
+    // var leftUpperArm = f.select("#left-upper-arm");
+    // var rightUpperArm = f.select("#rightUpperArm");
+    // var body = f.select("#body");
+    // var legRoll = f.select("#legRoll");
+
+    // For debugging
+    window.hat = hat;
+
+    var hatBtnSel = ".hat-btn";
+    var hatBtn = $(hatBtnSel);
+    hatBtn.click(function() {
+      hat.toggleClass('hide');
+      hatBtn.toggleClass('active');
+    });
+
+  });
 
   // ---------------------------------------
   // Primus connection
