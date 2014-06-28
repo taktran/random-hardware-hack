@@ -2,8 +2,20 @@
 (function (){
   'use strict';
 
-  // Containers
-  // var resultsEl = $('.results');
+  // Container
+
+  // ---------------------------------------
+  // Snap svg
+  // ---------------------------------------
+  var imageSel = '#rolly-polly';
+  var imagePath = '../img/ms-squiggle.svg';
+  var image = Snap(imageSel);
+
+  Snap.load(imagePath, function(f) {
+    var g = f.select("svg");
+    image.append(g);
+  });
+
 
   // ---------------------------------------
   // Primus connection
