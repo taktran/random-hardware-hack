@@ -22,10 +22,12 @@
     // var rightUpperArm = f.select("#rightUpperArm");
     // var body = f.select("#body");
     var legRollLarge = image.select("#leg-roll-large");
+    var smallRollLarge = image.select("#leg-roll-small");
 
     // For debugging
     window.hat = hat;
     window.legRollLarge = legRollLarge;
+    window.image = image;
 
     // Show/Hide hat
     var hatHideBtnSel = ".hat-hide-btn";
@@ -66,16 +68,39 @@
       });
     });
 
-    var rollBtnSel = ".roll-left-btn";
-    $(rollBtnSel).click(function() {
+    var brokenRollBtn = ".broken-roll-left-btn";
+    $(brokenRollBtn).click(function() {
+      var animationTime = 600;
+      var animationBackTime = 600;
+      var rotation = 500;
+      var xMove = -200;
 
       legRollLarge.animate({
-        transform: "t-100,0 R 360,341.454,445.164"
-      }, 300, mina.easeout, function() {
+        transform: "t0,0 R" + rotation
+      }, animationTime, mina.easeout, function() {
         // Come back
         legRollLarge.animate({
           transform: "t0,0"
-        }, 300, mina.easein);
+        }, animationBackTime, mina.easein);
+      });
+      
+      smallRollLarge.animate({
+        transform: "t0,0 R" + -rotation // Negate rotation
+      }, animationTime, mina.easeout, function() {
+        // Come back
+        smallRollLarge.animate({
+          transform: "t0,0"
+        }, animationBackTime, mina.easein);
+      });
+
+      var allImages = Snap.selectAll("g");
+      allImages.animate({
+        transform: "t" + xMove + ",0"
+      }, animationTime, mina.easeout, function() {
+        // Come back
+        allImages.animate({
+          transform: "t0,0"
+        }, animationBackTime, mina.easein);
       });
     });
   });
