@@ -16,14 +16,16 @@
   Snap.load(imagePath, function(f) {
     image.append(f);
 
-    // var face = f.select("#face");
+    var upperBody = image.select("#upper-body");
     var hat = image.select("#hat");
-    var face = image.select("#face");
-    var leftUpperArm = image.select("#left-upper-arm");
-    var rightUpperArm = image.select("#right-upper-arm");
-    var leftLowerArm = image.select("#left-lower-arm");
-    var rightLowerArm = image.select("#right-lower-arm");
-    var body = image.select("#body");
+    // var face = image.select("#face");
+    // var body = image.select("#body");
+    // var leftUpperArm = image.select("#left-upper-arm");
+    // var rightUpperArm = image.select("#right-upper-arm");
+    // var leftLowerArm = image.select("#left-lower-arm");
+    // var rightLowerArm = image.select("#right-lower-arm");
+
+    // var lowerBody = image.select("#lower-body");
     var legRollLarge = image.select("#leg-roll-large");
     var smallRollLarge = image.select("#leg-roll-small");
 
@@ -133,60 +135,11 @@
         }, animationBackTime, mina.easein);
       });
 
-      // 
-      hat.animate({
+      upperBody.animate({
         transform: "t" + xMove + ",0"
       }, animationTime, mina.easeout, function() {
         // Come back
-        hat.animate({
-          transform: "t0,0"
-        }, animationBackTime, mina.easein);
-      });
-      leftUpperArm.animate({
-        transform: "t" + xMove + ",0"
-      }, animationTime, mina.easeout, function() {
-        // Come back
-        leftUpperArm.animate({
-          transform: "t0,0"
-        }, animationBackTime, mina.easein);
-      });
-      rightUpperArm.animate({
-        transform: "t" + xMove + ",0"
-      }, animationTime, mina.easeout, function() {
-        // Come back
-        rightUpperArm.animate({
-          transform: "t0,0"
-        }, animationBackTime, mina.easein);
-      });
-      leftLowerArm.animate({
-        transform: "t" + xMove + ",0"
-      }, animationTime, mina.easeout, function() {
-        // Come back
-        leftLowerArm.animate({
-          transform: "t0,0"
-        }, animationBackTime, mina.easein);
-      });
-      rightLowerArm.animate({
-        transform: "t" + xMove + ",0"
-      }, animationTime, mina.easeout, function() {
-        // Come back
-        rightLowerArm.animate({
-          transform: "t0,0"
-        }, animationBackTime, mina.easein);
-      });
-      body.animate({
-        transform: "t" + xMove + ",0"
-      }, animationTime, mina.easeout, function() {
-        // Come back
-        body.animate({
-          transform: "t0,0"
-        }, animationBackTime, mina.easein);
-      });
-      face.animate({
-        transform: "t" + xMove + ",0"
-      }, animationTime, mina.easeout, function() {
-        // Come back
-        face.animate({
+        upperBody.animate({
           transform: "t0,0"
         }, animationBackTime, mina.easein);
       });
