@@ -41,8 +41,9 @@ board.on("ready", function() {
   // Hardware setup
   // --------------------------------------------
 
-  // Photo resister
-  var photoResistor = new Sensor(SENSOR_PINS.photoResistor, board);
+  sensor_creator("lightSensor", "A1", 100, "change", light_sensor_callback);
+  sensor_creator("flexSensor", "A2", 100, "change", flex_sensor_callback);
+  sensor_creator("pressureSensor", "A0", 100, "change", pressure_sensor_callback);
 
   // --------------------------------------------
   // Real time connection
@@ -115,3 +116,26 @@ board.on("ready", function() {
   server.listen(9999, '0.0.0.0');
 
 });
+
+function light_sensor_callback(value, name){
+  console.log(value + " " + name);
+}
+
+function pressure_sensor_callback(value, name){
+  console.log(value + " " + name);
+}
+
+function flex_sensor_callback(value, name){
+  console.log(value + " " + name);
+}
+
+function sensor_creator (name, inputPin, inputFreq, inputEvent, callback) {
+  var sensor = new five.Sensor({
+    pin: inputPin,
+    freq: inputFreq
+  });
+
+  sensor.on(inputEvent, function(){
+    callback(this.value, name)
+  });
+}
