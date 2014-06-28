@@ -14,63 +14,11 @@ body {
   text-align: center;
 }
 
-.init-container {
-  display: none; // Hide by default
-
-  text-align: center;
-
-  .start-button {
-    background-color: $green;
-    color: $white;
-    border: none;
-
-    font-size: 5em;
-    padding: 20px 40px;
-    margin-top: 60px;
-  }
+.controls {
+  float: right;
+  margin-top: 8px;
 }
 
-.game-container {
-  display: none; // Hide by default
-
-  .timer-container {
-    text-align: center;
-  }
-
-  .timer {
-    font-size: 10em;
-    line-height: 1em;
-  }
-
-  .restart-button {
-    margin-top: 20px;
-  }
-
-  .score-container {
-    text-align: center;
-  }
-
-  .score {
-    font-size: 10em;
-    line-height: 1em;
-  }
-
-  .restart-container {
-    text-align: center;
-  }
-}
-
-.image-container {
-  position: relative;
-
-  .overlay-1 {
-    position: absolute;
-    top: 300px;
-    left: 453px;
-    width: 60px;
-    height: 50px;
-
-    background-color: hsla(0,100,50, 0.5);
-  }
-
+.hide {
+  display: none;
 }
