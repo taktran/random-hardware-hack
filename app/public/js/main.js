@@ -18,9 +18,12 @@
 
     // var face = f.select("#face");
     var hat = image.select("#hat");
-    // var leftUpperArm = f.select("#left-upper-arm");
-    // var rightUpperArm = f.select("#rightUpperArm");
-    // var body = f.select("#body");
+    var face = image.select("#face");
+    var leftUpperArm = image.select("#left-upper-arm");
+    var rightUpperArm = image.select("#right-upper-arm");
+    var leftLowerArm = image.select("#left-lower-arm");
+    var rightLowerArm = image.select("#right-lower-arm");
+    var body = image.select("#body");
     var legRollLarge = image.select("#leg-roll-large");
     var smallRollLarge = image.select("#leg-roll-small");
 
@@ -108,11 +111,12 @@
     $(rollLeftBtn).click(function() {
       var animationTime = 600;
       var animationBackTime = 600;
-      var rotation = 500;
+      var largeRotation = 200;
+      var smallRotation = -500;
       var xMove = -200;
 
       legRollLarge.animate({
-        transform: "t" + xMove + ",0,r360"
+        transform: "t" + xMove + ",0,r" + largeRotation
       }, animationTime, mina.easeout, function() {
         // Come back
         legRollLarge.animate({
@@ -121,10 +125,68 @@
       });
 
       smallRollLarge.animate({
-        transform: "t" + xMove + ",0,r" + -rotation // Negate rotation
+        transform: "t" + xMove + ",0,r" + smallRotation
       }, animationTime, mina.easeout, function() {
         // Come back
         smallRollLarge.animate({
+          transform: "t0,0"
+        }, animationBackTime, mina.easein);
+      });
+
+      // 
+      hat.animate({
+        transform: "t" + xMove + ",0"
+      }, animationTime, mina.easeout, function() {
+        // Come back
+        hat.animate({
+          transform: "t0,0"
+        }, animationBackTime, mina.easein);
+      });
+      leftUpperArm.animate({
+        transform: "t" + xMove + ",0"
+      }, animationTime, mina.easeout, function() {
+        // Come back
+        leftUpperArm.animate({
+          transform: "t0,0"
+        }, animationBackTime, mina.easein);
+      });
+      rightUpperArm.animate({
+        transform: "t" + xMove + ",0"
+      }, animationTime, mina.easeout, function() {
+        // Come back
+        rightUpperArm.animate({
+          transform: "t0,0"
+        }, animationBackTime, mina.easein);
+      });
+      leftLowerArm.animate({
+        transform: "t" + xMove + ",0"
+      }, animationTime, mina.easeout, function() {
+        // Come back
+        leftLowerArm.animate({
+          transform: "t0,0"
+        }, animationBackTime, mina.easein);
+      });
+      rightLowerArm.animate({
+        transform: "t" + xMove + ",0"
+      }, animationTime, mina.easeout, function() {
+        // Come back
+        rightLowerArm.animate({
+          transform: "t0,0"
+        }, animationBackTime, mina.easein);
+      });
+      body.animate({
+        transform: "t" + xMove + ",0"
+      }, animationTime, mina.easeout, function() {
+        // Come back
+        body.animate({
+          transform: "t0,0"
+        }, animationBackTime, mina.easein);
+      });
+      face.animate({
+        transform: "t" + xMove + ",0"
+      }, animationTime, mina.easeout, function() {
+        // Come back
+        face.animate({
           transform: "t0,0"
         }, animationBackTime, mina.easein);
       });
