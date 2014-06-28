@@ -60,7 +60,10 @@
       hat.animate({
         transform: "t-100,0 R -90"
       }, 300, mina.easeout, function() {
-        // Callback
+        // Come back
+        hat.animate({
+          transform: "t0,0"
+        }, 300, mina.easein);
       });
     });
   });
