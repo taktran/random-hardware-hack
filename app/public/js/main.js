@@ -49,7 +49,21 @@
       }, startMoveTime, mina.elastic, function() {
         hat.animate({
           transform: "t0,0 R " + startDeg
-        }, endMoveTime, mina.elastic);
+        }, endMoveTime, mina.linear);
+      });
+    });
+
+    var hatRollBtnSel = ".hat-roll-btn";
+    $(hatRollBtnSel).click(function() {
+      var startDeg = 0;
+      var toDeg = 3;
+      var startMoveTime = 700;
+      var endMoveTime = 700;
+
+      hat.animate({
+        transform: "t0,0 R " + toDeg
+      }, startMoveTime, mina.linear, function() {
+        // Callback
       });
     });
   });
