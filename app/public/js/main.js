@@ -1,5 +1,5 @@
 /*jshint -W064 */
-/*global Primus: true, Snap: true*/
+/*global Primus: true, Snap: true, mina: true*/
 (function (){
   'use strict';
 
@@ -55,14 +55,11 @@
 
     var hatRollBtnSel = ".hat-roll-btn";
     $(hatRollBtnSel).click(function() {
-      var startDeg = 0;
-      var toDeg = 3;
-      var startMoveTime = 700;
-      var endMoveTime = 700;
+      var moveTime = 700;
 
       hat.animate({
-        transform: "t0,0 R " + toDeg
-      }, startMoveTime, mina.linear, function() {
+        transform: "t-100,0 R -90"
+      }, 300, mina.easeout, function() {
         // Callback
       });
     });
