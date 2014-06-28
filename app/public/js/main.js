@@ -21,10 +21,11 @@
     // var leftUpperArm = f.select("#left-upper-arm");
     // var rightUpperArm = f.select("#rightUpperArm");
     // var body = f.select("#body");
-    // var legRoll = f.select("#legRoll");
+    var legRollLarge = image.select("#leg-roll-large");
 
     // For debugging
     window.hat = hat;
+    window.legRollLarge = legRollLarge;
 
     // Show/Hide hat
     var hatHideBtnSel = ".hat-hide-btn";
@@ -55,13 +56,24 @@
 
     var hatRollBtnSel = ".hat-roll-btn";
     $(hatRollBtnSel).click(function() {
-      var moveTime = 700;
-
       hat.animate({
         transform: "t-85,-30 R -90"
       }, 300, mina.easeout, function() {
         // Come back
         hat.animate({
+          transform: "t0,0"
+        }, 300, mina.easein);
+      });
+    });
+
+    var rollBtnSel = ".roll-left-btn";
+    $(rollBtnSel).click(function() {
+
+      legRollLarge.animate({
+        transform: "t-100,0 R 360,341.454,445.164"
+      }, 300, mina.easeout, function() {
+        // Come back
+        legRollLarge.animate({
           transform: "t0,0"
         }, 300, mina.easein);
       });
